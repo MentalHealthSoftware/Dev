@@ -25,16 +25,17 @@ class _MyPhoneState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     int _currentIndex = 0;
     final List<Widget> _screens = [
-      HomeScreen(),
-      LoginScreen(),
-      OTPScreen(),
-    ];
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Consultation App'),
-      ),
-      body: Text("data"),
 
+    HomeScreen(),
+    LoginScreen(),
+    OTPScreen(),
+  ];
+    return Scaffold(
+      // appBar: AppBar(
+      //   title: Text('Consultation App'),
+      // ),
+      body: Text("data"),
+      
       // ListView(
       //   children: [
       //     SearchAndWalletIcons(),
@@ -53,13 +54,14 @@ class _MyPhoneState extends State<HomeScreen> {
       //     // Repeat CounsellorEntry with different data as needed
       //   ],
       // ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+
+    bottomNavigationBar: BottomNavigationBar(
+        // currentIndex: _currentIndex,
+        // onTap: (index) {
+        //   setState(() {
+        //     _currentIndex = index;
+        //   });
+        // },
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.chat),

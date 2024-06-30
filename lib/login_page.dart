@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mentalheathstartup/constants/color.dart';
 import 'package:mentalheathstartup/otp_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+
+  class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
@@ -61,7 +62,8 @@ class _LoginState extends State<LoginScreen> {
                 Container(
                   height: 55,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+
+                    color:Colors.white,
                       border: Border.all(width: 1, color: Colors.grey),
                       borderRadius: BorderRadius.circular(10)),
                   child: Row(
@@ -75,7 +77,8 @@ class _LoginState extends State<LoginScreen> {
                         child: TextField(
                           controller: countryController,
                           keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
+
+                          decoration:const InputDecoration(
                             border: InputBorder.none,
                           ),
                         ),
@@ -92,20 +95,24 @@ class _LoginState extends State<LoginScreen> {
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Enter Mobile Number",
+
+                          hintText: "Phone",
                         ),
                       ))
                     ],
                   ),
                 ),
+                
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     // Handle OTP generation
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => OTPScreen()),
-                    );
+
+                   Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => OTPScreen()),
+);
+
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.darkOrange,
