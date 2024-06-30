@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mentalheathstartup/constants/color.dart';
 import 'package:mentalheathstartup/otp_screen.dart';
 
+
   class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -61,6 +62,7 @@ class _LoginState extends State<LoginScreen> {
                 Container(
                   height: 55,
                   decoration: BoxDecoration(
+
                     color:Colors.white,
                       border: Border.all(width: 1, color: Colors.grey),
                       borderRadius: BorderRadius.circular(10)),
@@ -75,6 +77,7 @@ class _LoginState extends State<LoginScreen> {
                         child: TextField(
                           controller: countryController,
                           keyboardType: TextInputType.number,
+
                           decoration:const InputDecoration(
                             border: InputBorder.none,
                           ),
@@ -92,6 +95,7 @@ class _LoginState extends State<LoginScreen> {
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
                           border: InputBorder.none,
+
                           hintText: "Phone",
                         ),
                       ))
@@ -103,6 +107,7 @@ class _LoginState extends State<LoginScreen> {
                 ElevatedButton(
                   onPressed: () {
                     // Handle OTP generation
+
                    Navigator.push(
   context,
   MaterialPageRoute(builder: (context) => OTPScreen()),

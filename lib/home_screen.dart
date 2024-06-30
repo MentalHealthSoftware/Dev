@@ -4,6 +4,7 @@ import 'package:mentalheathstartup/components/counseller_entry_widget.dart';
 import 'package:mentalheathstartup/components/search_wallet_icon.dart';
 import 'package:mentalheathstartup/login_page.dart';
 import 'package:mentalheathstartup/otp_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -19,11 +20,12 @@ class _MyPhoneState extends State<HomeScreen> {
     countryController.text = "+91";
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     int _currentIndex = 0;
     final List<Widget> _screens = [
+
     HomeScreen(),
     LoginScreen(),
     OTPScreen(),
@@ -52,6 +54,7 @@ class _MyPhoneState extends State<HomeScreen> {
       //     // Repeat CounsellorEntry with different data as needed
       //   ],
       // ),
+
     bottomNavigationBar: BottomNavigationBar(
         // currentIndex: _currentIndex,
         // onTap: (index) {
