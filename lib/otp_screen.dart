@@ -7,10 +7,10 @@ class OTPScreen extends StatefulWidget {
   const OTPScreen({super.key});
 
   @override
-  State<OTPScreen> createState() => _MyPhoneState();
+  State<OTPScreen> createState() => _OTPState();
 }
 
-class _MyPhoneState extends State<OTPScreen> {
+class _OTPState extends State<OTPScreen> {
   TextEditingController countryController = TextEditingController();
 
   @override

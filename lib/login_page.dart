@@ -6,10 +6,10 @@ import 'package:mentalheathstartup/otp_screen.dart';
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _MyPhoneState();
+  State<LoginScreen> createState() => _LoginState();
 }
 
-class _MyPhoneState extends State<LoginScreen> {
+class _LoginState extends State<LoginScreen> {
   TextEditingController countryController = TextEditingController();
 
   @override
