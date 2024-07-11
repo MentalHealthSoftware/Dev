@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentalheathstartup/constants/color.dart';
 import 'package:mentalheathstartup/otp_screen.dart';
@@ -5,12 +6,14 @@ import 'package:mentalheathstartup/otp_screen.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  static String verify = "";
   @override
   State<LoginScreen> createState() => _LoginState();
 }
 
 class _LoginState extends State<LoginScreen> {
   TextEditingController countryController = TextEditingController();
+  TextEditingController numberController = TextEditingController();
 
   @override
   void initState() {
@@ -87,8 +90,9 @@ class _LoginState extends State<LoginScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      const Expanded(
+                      Expanded(
                           child: TextField(
+                        controller: numberController,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -100,11 +104,26 @@ class _LoginState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    // Handle OTP generation
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => OTPScreen()),
+                  onPressed: () async {
+                    //To block reCAPCHA, after publishing app on play store
+
+                    // await FirebaseAuth.instance
+                    //     .setSettings(appVerificationDisabledForTesting: true);
+
+                    await FirebaseAuth.instance.verifyPhoneNumber(
+                      phoneNumber:
+                          '${countryController.text + numberController.text}',
+                      verificationCompleted:
+                          (PhoneAuthCredential credential) {},
+                      verificationFailed: (FirebaseAuthException e) {},
+                      codeSent: (String verificationId, int? resendToken) {
+                        LoginScreen.verify = verificationId;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => OTPScreen()),
+                        );
+                      },
+                      codeAutoRetrievalTimeout: (String verificationId) {},
                     );
                   },
                   style: ElevatedButton.styleFrom(

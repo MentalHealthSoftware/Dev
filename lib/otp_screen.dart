@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentalheathstartup/home_screen.dart';
+import 'package:mentalheathstartup/login_page.dart';
 import 'package:pinput/pinput.dart';
 import 'package:mentalheathstartup/constants/color.dart';
 
@@ -19,6 +21,8 @@ class _OTPState extends State<OTPScreen> {
     super.initState();
   }
 
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  var otp = "";
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
@@ -108,16 +112,16 @@ class _OTPState extends State<OTPScreen> {
                       ),
                       SizedBox(height: 20),
                       Pinput(
-                        length: 4,
+                        length: 6,
                         defaultPinTheme: defaultPinTheme,
                         keyboardType: TextInputType.number,
                         showCursor: true,
                         onChanged: (pin) {
-                          print(pin);
+                          otp = pin;
                         },
                       ),
                       SizedBox(height: 20),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -128,7 +132,7 @@ class _OTPState extends State<OTPScreen> {
                             ),
                           ),
                           Text(
-                            " RESEND OTP",
+                            "RESEND OTP",
                             style: TextStyle(
                               color: AppColor.darkGreen,
                               fontSize: 14,
@@ -138,9 +142,20 @@ class _OTPState extends State<OTPScreen> {
                       ),
                       SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {
-                          // Handle OTP verification
-                          Navigator.pushNamed(context, "/home");
+                        onPressed: () async {
+                          try {
+                            PhoneAuthCredential credential =
+                                PhoneAuthProvider.credential(
+                                    verificationId: LoginScreen.verify,
+                                    smsCode: otp);
+
+                            // Sign the user in (or link) with the credential
+                            await auth.signInWithCredential(credential);
+
+                            Navigator.pushNamed(context, "/home");
+                          } catch (e) {
+                            print(e);
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
