@@ -1,11 +1,11 @@
 // import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mentalheathstartup/home_page.dart';
 import 'firebase_options.dart';
 import 'package:mentalheathstartup/login_page.dart';
 import 'package:mentalheathstartup/otp_screen.dart';
 import 'package:mentalheathstartup/phone_screen.dart';
-import 'package:mentalheathstartup/home_screen.dart';
 
 Future<void> main() async {
   // Initialize Firebase
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: LoginScreen(),
       routes: {
-        '/home': (context) => HomeScreen(),
+        '/home': (context) => HomePage(),
         '/otp': (context) => OTPScreen(),
       },
     );
