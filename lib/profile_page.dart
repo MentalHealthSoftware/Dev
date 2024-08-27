@@ -1,11 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mentalheathstartup/edit_profile.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key, required this.name, required this.email});
+  const ProfilePage(
+      {super.key,
+      required this.name,
+      required this.email,
+      required this.avatar});
   final String name;
   final String email;
+  final File? avatar;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -42,11 +50,16 @@ class _ProfilePageState extends State<ProfilePage> {
                               width: 4.0, // Border width
                             ),
                           ),
-                          child: const CircleAvatar(
+                          child: CircleAvatar(
                             radius:
                                 46, // Radius should be slightly smaller than the outer CircleAvatar to accommodate the border
-                            backgroundColor: Color(
-                                0xFF003F5A), // Background color for the inner circle
+                            backgroundImage: widget.avatar != null
+                                ? FileImage(widget.avatar!)
+                                : null,
+                            backgroundColor: widget.avatar == null
+                                ? const Color(0xFF003F5A)
+                                : Colors
+                                    .transparent, // Background color for the inner circle
                           ),
                         ),
                       ),
@@ -85,28 +98,34 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30.0),
-              child: ListTile(
-                leading: Icon(
-                  Icons.edit,
-                  color: Color(0xff007A7A),
-                ),
-                title: Text(
-                  "Edit Profile",
-                  style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: Color(0xff003F5A)),
-                ),
-                subtitle: Text(
-                  "Update Personal Details",
-                  style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      color: Color(0xff007A7A)),
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward,
-                  color: Color.fromARGB(255, 219, 215, 215),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => editProfile()));
+                },
+                child: ListTile(
+                  leading: Icon(
+                    Icons.edit,
+                    color: Color(0xff007A7A),
+                  ),
+                  title: Text(
+                    "Edit Profile",
+                    style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                        color: Color(0xff003F5A)),
+                  ),
+                  subtitle: Text(
+                    "Update Personal Details",
+                    style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Color(0xff007A7A)),
+                  ),
+                  trailing: Icon(
+                    Icons.arrow_forward,
+                    color: Color.fromARGB(255, 219, 215, 215),
+                  ),
                 ),
               ),
             ),

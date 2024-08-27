@@ -54,6 +54,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       builder: (context) => ProfilePage(
                             name: 'Name',
                             email: 'Email',
+                            avatar: null,
                           )));
             },
             child: CircleAvatar(
