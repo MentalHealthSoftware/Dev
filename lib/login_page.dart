@@ -110,20 +110,25 @@ class _LoginState extends State<LoginScreen> {
                     // await FirebaseAuth.instance
                     //     .setSettings(appVerificationDisabledForTesting: true);
 
-                    await FirebaseAuth.instance.verifyPhoneNumber(
-                      phoneNumber:
-                          '${countryController.text + numberController.text}',
-                      verificationCompleted:
-                          (PhoneAuthCredential credential) {},
-                      verificationFailed: (FirebaseAuthException e) {},
-                      codeSent: (String verificationId, int? resendToken) {
-                        LoginScreen.verify = verificationId;
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => OTPScreen()),
-                        );
-                      },
-                      codeAutoRetrievalTimeout: (String verificationId) {},
+                    // await FirebaseAuth.instance.verifyPhoneNumber(
+                    //   phoneNumber:
+                    //       '${countryController.text + numberController.text}',
+                    //   verificationCompleted:
+                    //       (PhoneAuthCredential credential) {},
+                    //   verificationFailed: (FirebaseAuthException e) {},
+                    //   codeSent: (String verificationId, int? resendToken) {
+                    //     LoginScreen.verify = verificationId;
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(builder: (context) => OTPScreen()),
+                    //     );
+                    //   },
+                    //   codeAutoRetrievalTimeout: (String verificationId) {},
+                    // );
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => OTPScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

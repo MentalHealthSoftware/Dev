@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 import 'app_bar.dart';
 import 'bottom_navigation_bar.dart';
 
-class AppLayout extends StatelessWidget {
+class AppLayout extends StatefulWidget {
   final Widget body;
   final int currentIndex;
 
   AppLayout({required this.body, required this.currentIndex});
 
   @override
+  State<AppLayout> createState() => _AppLayoutState();
+}
+
+class _AppLayoutState extends State<AppLayout> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      body: body,
+      body: widget.body,
       bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: currentIndex,
+        currentIndex: widget.currentIndex,
         onTap: (index) {
           switch (index) {
             case 0:

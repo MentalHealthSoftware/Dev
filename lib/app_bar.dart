@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mentalheathstartup/profile_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -45,9 +46,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: Colors.grey,
           ),
           const SizedBox(width: 16),
-          const CircleAvatar(
-            backgroundColor: Colors.grey,
-            radius: 20,
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfilePage(
+                            name: 'Name',
+                            email: 'Email',
+                            avatar: null,
+                          )));
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.grey,
+              radius: 20,
+            ),
           ),
         ],
       ),
