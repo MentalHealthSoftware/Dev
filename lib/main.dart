@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentalheathstartup/login_page.dart';
 import 'home_page.dart';
 import 'chats_page.dart';
 import 'tasks_page.dart';
@@ -14,11 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      initialRoute: '/home',
+      initialRoute: '/login',
       routes: {
+        '/login': (context) => LoginScreen(),
         '/home': (context) => HomePage(),
         '/chats': (context) => ChatsPage(),
         '/tasks': (context) => TasksPage(),

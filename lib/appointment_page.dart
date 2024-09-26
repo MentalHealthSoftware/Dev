@@ -10,6 +10,7 @@ class AppointmentPage extends StatefulWidget {
 class _AppointmentPageState extends State<AppointmentPage> {
   DateTime _currentDate = DateTime.now();
   DateTime? _selectedDate; // Allow null values
+  String? _selectedTime; // Allow null values
 
   void _goToPreviousMonth() {
     setState(() {
@@ -270,9 +271,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 ],
               ),
             ),
-            SizedBox(height: 14),
+            SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.only(left: 45.0),
+              padding: const EdgeInsets.only(left: 42.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Column(
@@ -287,7 +288,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                         color: Color.fromRGBO(0, 122, 122, 1),
                       ),
                     ),
-                    SizedBox(height: 12),
+                    SizedBox(height: 8),
                     Row(
                       children: [
                         Container(
@@ -299,7 +300,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),
-                        SizedBox(width: 5),
+                        SizedBox(width: 4),
                         Text(
                           'Selected',
                           style: TextStyle(
@@ -309,7 +310,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                             color: Color.fromRGBO(0, 63, 90, 1),
                           ),
                         ),
-                        SizedBox(width: 14),
+                        SizedBox(width: 8),
                         Container(
                           width: 12,
                           height: 12,
@@ -319,7 +320,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),
-                        SizedBox(width: 5),
+                        SizedBox(width: 4),
                         Text(
                           'Available',
                           style: TextStyle(
@@ -329,7 +330,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                             color: Color.fromRGBO(0, 63, 90, 1),
                           ),
                         ),
-                        SizedBox(width: 14),
+                        SizedBox(width: 8),
                         Container(
                           width: 12,
                           height: 12,
@@ -339,7 +340,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),
-                        SizedBox(width: 5),
+                        SizedBox(width: 4),
                         Text(
                           'Unavailable',
                           style: TextStyle(
@@ -351,6 +352,42 @@ class _AppointmentPageState extends State<AppointmentPage> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 12),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        _buildTimeButton('8:00 AM'),
+                        _buildTimeButton('9:00 AM'),
+                        _buildTimeButton('10:00 AM'),
+                        _buildTimeButton('11:00 AM'),
+                        _buildTimeButton('12:00 PM'),
+                        _buildTimeButton('3:00 PM'),
+                        _buildTimeButton('4:00 PM'),
+                        _buildTimeButton('5:00 PM'),
+                      ],
+                    ),
+                    SizedBox(height: 12),
+                    Container(
+                      width: 305,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(
+                            222, 102, 0, 1), // Button background color
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'CONTINUE TO PAYMENT',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            color: Colors.white, // Text color
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -359,6 +396,44 @@ class _AppointmentPageState extends State<AppointmentPage> {
         ),
       ),
       currentIndex: 0,
+    );
+  }
+
+  Widget _buildTimeButton(String time) {
+    bool isSelected = _selectedTime == time;
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedTime = time;
+        });
+      },
+      child: Container(
+        width: 70,
+        height: 32,
+        decoration: BoxDecoration(
+          color: isSelected
+              ? Color.fromRGBO(
+                  0, 122, 122, 1) // Selected button background color
+              : Color.fromRGBO(198, 223, 223, 0.39), // Button background color
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Color.fromRGBO(0, 122, 122, 0.41), // Border color
+          ),
+        ),
+        child: Center(
+          child: Text(
+            time,
+            style: TextStyle(
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w400,
+              fontSize: 10,
+              color: isSelected
+                  ? Colors.white // Selected button text color
+                  : Color.fromRGBO(0, 122, 122, 1), // Text color
+            ),
+          ),
+        ),
+      ),
     );
   }
 

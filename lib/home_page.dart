@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'model/specialist.dart';
 import 'app_layout.dart';
+import 'appointment_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -49,18 +50,16 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildCategoryBox(
-                    'Counsellors', 'Subtitle for Counsellors', 'Counsellors'),
-                SizedBox(width: 8),
-                _buildCategoryBox(
-                    'Therapists', 'Subtitle for Therapists', 'Therapists'),
-                SizedBox(width: 8),
-                _buildCategoryBox('Psychiatrists', 'Subtitle for Psychiatrists',
-                    'Psychiatrists'),
-              ]            ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              _buildCategoryBox(
+                  'Counsellors', 'Subtitle for Counsellors', 'Counsellors'),
+              SizedBox(width: 8),
+              _buildCategoryBox(
+                  'Therapists', 'Subtitle for Therapists', 'Therapists'),
+              SizedBox(width: 8),
+              _buildCategoryBox('Psychiatrists', 'Subtitle for Psychiatrists',
+                  'Psychiatrists'),
+            ]),
             SizedBox(height: 8),
             _buildAvailabilityText(),
             SizedBox(height: 8),
@@ -311,7 +310,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/appointment');
+                          Navigator.of(context).push(_createRoute());
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -341,6 +340,26 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          AppointmentPage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }
