@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'app_layout.dart'; // Import the AppLayout
-import 'appointment_page.dart'; // Import the AppointmentPage
+import 'package:flutter/services.dart';
+import 'model/specialist.dart';
+import 'app_layout.dart';
+import 'appointment_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,66 +11,70 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String clickedBox = 'Counsellors'; // Set an initial value
-  List<bool> isHeartFilled = [
-    false,
-    false,
-    false,
-    false
-  ]; // State to manage heart icon fill status
+  String clickedBox = 'Counsellors';
+  List<Specialist> specialists = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    final String response = await rootBundle.loadString('assets/data.json');
+    final data = await json.decode(response) as List;
+    setState(() {
+      specialists = data.map((json) => Specialist.fromJson(json)).toList();
+    });
+  }
+
+  List<Specialist> _getSpecialistsByCategory(String category) {
+    return specialists
+        .where((specialist) => specialist.category == category)
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
     return AppLayout(
       body: _buildBody(),
-      currentIndex: 0, // Set the current index for the BottomNavigationBar
+      currentIndex: 0,
     );
   }
 
   Widget _buildBody() {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        color: Colors.white, // Fixed background color
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              SizedBox(height: 16), // Adjusted space between app bar and boxes
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildCategoryBox(
-                      'Counsellors', 'Subtitle for Counsellors', 'Counsellors'),
-                  SizedBox(width: 8), // Space between boxes
-                  _buildCategoryBox(
-                      'Therapists', 'Subtitle for Therapists', 'Therapists'),
-                  SizedBox(width: 8), // Space between boxes
-                  _buildCategoryBox('Psychiatrists',
-                      'Subtitle for Psychiatrists', 'Psychiatrists'),
-                ],
-              ),
-              SizedBox(height: 8), // Reduced space between boxes and text
-              _buildAvailabilityText(),
-              SizedBox(
-                  height: 8), // Reduced space between text and additional boxes
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _buildAdditionalBox(0),
-                      SizedBox(height: 8),
-                      _buildAdditionalBox(1),
-                      SizedBox(height: 8),
-                      _buildAdditionalBox(2),
-                      SizedBox(height: 8),
-                      _buildAdditionalBox(3),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          children: [
+            SizedBox(height: 16),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              _buildCategoryBox(
+                  'Counsellors', 'Subtitle for Counsellors', 'Counsellors'),
+              SizedBox(width: 8),
+              _buildCategoryBox(
+                  'Therapists', 'Subtitle for Therapists', 'Therapists'),
+              SizedBox(width: 8),
+              _buildCategoryBox('Psychiatrists', 'Subtitle for Psychiatrists',
+                  'Psychiatrists'),
+            ]),
+            SizedBox(height: 8),
+            _buildAvailabilityText(),
+            SizedBox(height: 8),
+            Expanded(
+              child: specialists.isEmpty
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      itemCount: _getSpecialistsByCategory(clickedBox).length,
+                      itemBuilder: (context, index) {
+                        return _buildSpecialistBox(
+                            _getSpecialistsByCategory(clickedBox)[index]);
+                      },
+                    ),
+            ),
+          ],
         ),
       ),
     );
@@ -149,17 +156,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildAvailabilityText() {
-    String availabilityText;
-    switch (clickedBox) {
-      case 'Therapists':
-        availabilityText = '27 therapists available';
-        break;
-      case 'Psychiatrists':
-        availabilityText = '38 psychiatrists available';
-        break;
-      default:
-        availabilityText = '38 counsellors available';
-    }
+    int availableCount = _getSpecialistsByCategory(clickedBox).length;
+    String availabilityText =
+        '$availableCount ${clickedBox.toLowerCase()} available';
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -183,8 +182,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildAdditionalBox(int index) {
+  Widget _buildSpecialistBox(Specialist specialist) {
     return Container(
+      margin: EdgeInsets.all(8),
       width: 379,
       height: 100,
       decoration: BoxDecoration(
@@ -213,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Lorem Ipsum",
+                        specialist.name,
                         style: TextStyle(
                           color: Color(0xFF003F5A),
                           fontFamily: 'Inter',
@@ -224,11 +224,12 @@ class _HomePageState extends State<HomePage> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            isHeartFilled[index] = !isHeartFilled[index];
+                            specialist.isHeartFilled =
+                                !specialist.isHeartFilled;
                           });
                         },
                         child: Icon(
-                          isHeartFilled[index]
+                          specialist.isHeartFilled
                               ? Icons.favorite
                               : Icons.favorite_border,
                           color: Color(0xFF003F5A),
@@ -238,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   Text(
-                    "3 years experience",
+                    specialist.experience,
                     style: TextStyle(
                       color: Color(0xFF007A7A),
                       fontFamily: 'Inter',
@@ -247,7 +248,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(
                         Icons.star,
@@ -276,7 +276,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        "4.2",
+                        specialist.rating.toString(),
                         style: TextStyle(
                           color: Color(0xFF007A7A),
                           fontFamily: 'Inter',
@@ -284,9 +284,9 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 10,
                         ),
                       ),
-                      Spacer(), // Add a Spacer to push reviews text to the end
+                      Spacer(),
                       Text(
-                        "(137 reviews)",
+                        "(${specialist.reviews} reviews)",
                         style: TextStyle(
                           color: Color(0xFF007A7A),
                           fontFamily: 'Inter',
@@ -300,7 +300,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Billed @ ₹10/min",
+                        "Billed @ ₹${specialist.billedRate}/min",
                         style: TextStyle(
                           color: Color(0xFF003F5A),
                           fontFamily: 'Inter',
@@ -310,7 +310,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/appointment');
+                          Navigator.of(context).push(_createRoute());
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -340,6 +340,26 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          AppointmentPage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }

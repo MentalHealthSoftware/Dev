@@ -1,0 +1,30 @@
+[
+    {
+      "name": "Specialist Name",
+      "experience": "3 years",
+      "rating": 4.5,
+      "reviews": 120,
+      "billedRate": 10.0,
+      "category": "Counsellors"
+    },
+    {
+      "name": "Another Specialist",
+      "experience": "5 years",
+      "rating": 4.7,
+      "reviews": 200,
+      "billedRate": 15.0,
+      "category": "Therapists"
+    },
+    {
+        "name": "Another Specialist",
+        "experience": "5 years",
+        "rating": 4.7,
+        "reviews": 200,
+        "billedRate": 15.0,
+        "category": "Therapists"
+      }
+  
+
+    
+  ]
+  
