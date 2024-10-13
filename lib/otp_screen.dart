@@ -145,13 +145,12 @@ class _OTPState extends State<OTPScreen> {
                         ElevatedButton(
                           onPressed: () async {
                             try {
-                              PhoneAuthCredential credential =
-                                  PhoneAuthProvider.credential(
-                                      verificationId: LoginScreen.verify,
-                                      smsCode: otp);
+                              // PhoneAuthCredential credential =
+                              //     PhoneAuthProvider.credential(
+                              //         verificationId: LoginScreen.verify,
+                              //         smsCode: otp);
 
-                              // Sign the user in (or link) with the credential
-                              await auth.signInWithCredential(credential);
+                              // await auth.signInWithCredential(credential);
 
                               Navigator.pushNamed(context, "/home");
                             } catch (e) {
@@ -167,7 +166,7 @@ class _OTPState extends State<OTPScreen> {
                             ),
                             padding: EdgeInsets.symmetric(vertical: 16),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               'VERIFY & PROCEED',
                               style: TextStyle(fontSize: 16),

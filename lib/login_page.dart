@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mentalheathstartup/constants/color.dart';
-import 'package:mentalheathstartup/otp_screen.dart';
 import 'package:mentalheathstartup/provider/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -106,10 +105,11 @@ class _LoginState extends State<LoginScreen> {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                   Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => OTPScreen()));
-                        },
+                MaterialPageRoute(
+                    builder: (context) => OTPScreen()));
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.darkOrange,
                     foregroundColor: Colors.white, // Button color
@@ -132,4 +132,3 @@ class _LoginState extends State<LoginScreen> {
       ),
     );
   }
-}
