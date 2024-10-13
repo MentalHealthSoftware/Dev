@@ -1,52 +1,50 @@
-// import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'firebase_options.dart';
+import 'package:mentalheathstartup/firebase_option.dart';
 import 'package:mentalheathstartup/login_page.dart';
-import 'package:mentalheathstartup/otp_screen.dart';
-import 'package:mentalheathstartup/phone_screen.dart';
-import 'package:mentalheathstartup/home_screen.dart';
+import 'package:mentalheathstartup/provider/provider.dart';
+import 'home_page.dart';
+import 'chats_page.dart';
+import 'tasks_page.dart';
+import 'subscriptions_page.dart';
+import 'package:provider/provider.dart';
+import 'appointment_page.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
-  // Initialize Firebase
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.playIntegrity,
   );
-
-  //To block reCAPCHA, after publishing app on play store
-
-  // await FirebaseAppCheck.instance.activate(
-  //   webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
-  //   androidProvider: AndroidProvider.debug,
-  //   appleProvider: AppleProvider.appAttest,
-  // );
-  // Run your app
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
-// void main() {
-
-//   runApp(MaterialApp(
-//     initialRoute: 'phone',
-//     debugShowCheckedModeBanner: false,
-//     routes: {
-//       'phone': (context) => MyPhone(),
-//       'verify': (context) => MyVerify()
-//     },
-//   ));
-// }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return MaterialApp(
+      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+      ),
+      initialRoute: authProvider.isSignedIn ? '/home' : '/login',
       routes: {
-        '/home': (context) => HomeScreen(),
-        '/otp': (context) => OTPScreen(),
+        '/login': (context) => LoginScreen(),
+        '/home': (context) => HomePage(),
+        '/chats': (context) => ChatsPage(),
+        '/tasks': (context) => TasksPage(),
+        '/subscriptions': (context) => SubscriptionsPage(),
+        '/appointment': (context) => AppointmentPage(),
       },
     );
   }
