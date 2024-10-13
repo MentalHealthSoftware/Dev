@@ -1,6 +1,7 @@
 // import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mentalheathstartup/IntroPages(3)/LinearProgress.dart';
 import 'package:mentalheathstartup/home_page.dart';
 import 'firebase_options.dart';
 import 'package:mentalheathstartup/login_page.dart';
@@ -36,6 +37,9 @@ Future<void> main() async {
 //   ));
 // }
 
+GlobalKey<LinearProgressState> linearProgressKey =
+    GlobalKey<LinearProgressState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -43,7 +47,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      theme: ThemeData(
+        fontFamily: 'Inter',
+      ),
+      home: LinearProgress(
+        key: linearProgressKey,
+      ),
       routes: {
         '/home': (context) => HomePage(),
         '/otp': (context) => OTPScreen(),
