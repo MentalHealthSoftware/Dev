@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyPhone extends StatefulWidget {
@@ -68,7 +69,7 @@ class _MyPhoneState extends State<MyPhone> {
                         child: TextField(
                           controller: countryController,
                           keyboardType: TextInputType.number,
-                          decoration:const InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                           ),
                         ),
@@ -99,14 +100,14 @@ class _MyPhoneState extends State<MyPhone> {
                   height: 45,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
-                        foregroundColor: Colors.white,
+                          backgroundColor: Colors.blueAccent,
+                          foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
                       onPressed: () {
                         Navigator.pushNamed(context, 'verify');
                       },
-                      child:const Text("Send the code")),
+                      child: const Text("Send the code")),
                 )
               ],
             ),
