@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mentalheathstartup/IntroPages(3)/LinearProgress.dart';
+import 'package:mentalheathstartup/Profile/RegisterAsPractitioner/LinearProgress.dart';
 
-class registerAs extends StatefulWidget {
+class RegisterAs extends StatefulWidget {
   final GlobalKey<LinearProgressState> linearProgressKey;
 
-  const registerAs({super.key, required this.linearProgressKey});
+  const RegisterAs({super.key, required this.linearProgressKey});
 
   @override
-  State<registerAs> createState() => _registerAsState();
+  State<RegisterAs> createState() => _RegisterAsState();
 }
 
-class _registerAsState extends State<registerAs> {
-  String _selectedOption = 'Counsellor';
+class _RegisterAsState extends State<RegisterAs> {
   final List<String> options = ['Counsellor', 'Psychiatrists', 'Therapist'];
+  final Set<String> _selectedOptions = {};
 
   Widget _buildOptionTile(String option) {
     return Padding(
@@ -20,7 +20,7 @@ class _registerAsState extends State<registerAs> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          border: _selectedOption == option
+          border: _selectedOptions.contains(option)
               ? Border.all(color: Color(0xff003F5A), width: 1)
               : null,
           color: Colors.white,
@@ -34,13 +34,16 @@ class _registerAsState extends State<registerAs> {
               color: Color(0xff003F5A),
             ),
           ),
-          trailing: Radio(
-            value: option,
-            groupValue: _selectedOption,
+          trailing: Checkbox(
+            value: _selectedOptions.contains(option),
             activeColor: Color(0xff003F5A),
-            onChanged: (String? value) {
+            onChanged: (bool? selected) {
               setState(() {
-                _selectedOption = value!;
+                if (selected == true) {
+                  _selectedOptions.add(option);
+                } else {
+                  _selectedOptions.remove(option);
+                }
               });
             },
           ),
@@ -80,7 +83,7 @@ class _registerAsState extends State<registerAs> {
                 child: _buildOptionTile(option),
               ),
             Text(
-              "Please note:certificates would be required",
+              "Please note: certificates would be required",
               style: TextStyle(
                   color: Color(0xff007A7A),
                   fontSize: 15,
@@ -95,11 +98,11 @@ class _registerAsState extends State<registerAs> {
                   side: BorderSide.none,
                   fixedSize: Size(235, 40),
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(8), // Adjust the radius as needed
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
                 onPressed: () {
+                  // Perform action based on _selectedOptions
                   widget.linearProgressKey.currentState!.nextPage();
                 },
                 child: Text(

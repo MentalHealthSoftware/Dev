@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mentalheathstartup/IntroPages(3)/Info.dart';
-import 'package:mentalheathstartup/IntroPages(3)/RegisterAs.dart';
-import 'package:mentalheathstartup/IntroPages(3)/TandC.dart';
+import 'package:mentalheathstartup/Profile/RegisterAsPractitioner/Info.dart';
+import 'package:mentalheathstartup/Profile/RegisterAsPractitioner/RegisterAs.dart';
+import 'package:mentalheathstartup/Profile/RegisterAsPractitioner/TandC.dart';
 
 // final GlobalKey<LinearProgressState> _linearProgressKey =
 //     GlobalKey<LinearProgressState>();
@@ -38,7 +38,7 @@ class LinearProgressState extends State<LinearProgress> {
         return TandC(
             linearProgressKey: widget.key as GlobalKey<LinearProgressState>);
       case 2:
-        return registerAs(
+        return RegisterAs(
             linearProgressKey: widget.key as GlobalKey<LinearProgressState>);
       case 3:
         return personalInfo();
@@ -52,6 +52,7 @@ class LinearProgressState extends State<LinearProgress> {
     double _progress = currentpage / 3;
     return Scaffold(
       appBar: AppBar(
+        // automaticallyImplyLeading: false,
         backgroundColor: currentpage == 2 || currentpage == 3
             ? Color.fromARGB(255, 204, 240, 188)
             : null,

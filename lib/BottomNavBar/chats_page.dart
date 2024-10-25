@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_layout.dart';
+import '../app_layout.dart';
 
 class ChatsPage extends StatelessWidget {
   @override

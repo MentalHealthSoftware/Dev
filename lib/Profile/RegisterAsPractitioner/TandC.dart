@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:mentalheathstartup/IntroPages(3)/LinearProgress.dart';
+import 'package:mentalheathstartup/Profile/RegisterAsPractitioner/LinearProgress.dart';
 
 class TandC extends StatefulWidget {
   final GlobalKey<LinearProgressState> linearProgressKey;

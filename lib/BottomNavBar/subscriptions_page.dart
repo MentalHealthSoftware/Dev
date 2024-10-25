@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_layout.dart'; // Import the AppLayout
+import '../app_layout.dart'; // Import the AppLayout
 
 class SubscriptionsPage extends StatelessWidget {
   @override

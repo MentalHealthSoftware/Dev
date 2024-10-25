@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mentalheathstartup/constants/color.dart';
-import 'package:mentalheathstartup/otp_screen.dart';
+import 'package:mentalheathstartup/Login/otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -104,32 +103,9 @@ class _LoginState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () async {
-                    //To block reCAPCHA, after publishing app on play store
-
-                    // await FirebaseAuth.instance
-                    //     .setSettings(appVerificationDisabledForTesting: true);
-
-                    // await FirebaseAuth.instance.verifyPhoneNumber(
-                    //   phoneNumber:
-                    //       '${countryController.text + numberController.text}',
-                    //   verificationCompleted:
-                    //       (PhoneAuthCredential credential) {},
-                    //   verificationFailed: (FirebaseAuthException e) {},
-                    //   codeSent: (String verificationId, int? resendToken) {
-                    //     LoginScreen.verify = verificationId;
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(builder: (context) => OTPScreen()),
-                    //     );
-                    //   },
-                    //   codeAutoRetrievalTimeout: (String verificationId) {},
-                    // );
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => OTPScreen()),
-                    );
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => OTPScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.darkOrange,
