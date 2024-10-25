@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'model/specialist.dart';
-import 'app_layout.dart';
+import '../../model/specialist.dart';
+import '../../app_layout.dart';
 import 'appointment_page.dart';
 
 class HomePage extends StatefulWidget {

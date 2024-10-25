@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'app_bar.dart';
-import 'bottom_navigation_bar.dart';
+import 'components/app_bar.dart';
+import 'BottomNavBar/bottom_navigation_bar.dart';
 
 class AppLayout extends StatefulWidget {
   final Widget body;

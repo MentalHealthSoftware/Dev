@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mentalheathstartup/home_page.dart';
-import 'package:mentalheathstartup/login_page.dart';
-import 'package:mentalheathstartup/otp_screen.dart';
-import 'package:mentalheathstartup/phone_screen.dart';
-import 'package:mentalheathstartup/firebase_option.dart';
-import 'package:mentalheathstartup/provider/provider.dart';
-import 'package:mentalheathstartup/chats_page.dart';
-import 'package:mentalheathstartup/appointment_page.dart';
-import 'package:mentalheathstartup/otp_screen.dart';
-import 'package:mentalheathstartup/subscriptions_page.dart';
-import 'package:mentalheathstartup/tasks_page.dart';
-import 'package:provider/provider.dart';
+import 'package:mentalheathstartup/Profile/RegisterAsPractitioner/LinearProgress.dart';
+import 'package:mentalheathstartup/Firebase/firebase_options.dart';
+import 'package:mentalheathstartup/BottomNavBar/Consult/home_page.dart';
+import 'package:mentalheathstartup/Login/login_page.dart';
+import 'package:mentalheathstartup/Login/otp_screen.dart';
+import 'package:mentalheathstartup/BottomNavBar/chats_page.dart';
+import 'package:mentalheathstartup/BottomNavBar/Consult/appointment_page.dart';
+import 'package:mentalheathstartup/Login/otp_screen.dart';
+import 'package:mentalheathstartup/BottomNavBar/subscriptions_page.dart';
+import 'package:mentalheathstartup/BottomNavBar/tasks_page.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -28,6 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.teal,
+        fontFamily: 'Inter',
       ),
       initialRoute: '/login',
       routes: {

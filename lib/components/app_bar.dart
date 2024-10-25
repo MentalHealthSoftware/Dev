@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mentalheathstartup/profile_page.dart';
+import 'package:mentalheathstartup/Profile/profile_page.dart';
+import 'package:mentalheathstartup/wallet.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -40,10 +41,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           const SizedBox(width: 16),
-          SvgPicture.asset(
-            'assets/wallet.svg',
-            height: 45,
-            color: Colors.grey,
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => Wallet()));
+            },
+            child: SvgPicture.asset(
+              'assets/wallet.svg',
+              height: 45,
+              color: Colors.grey,
+            ),
           ),
           const SizedBox(width: 16),
           InkWell(

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mentalheathstartup/profile_page.dart';
+import 'package:mentalheathstartup/Profile/profile_page.dart';
 
 class editProfile extends StatefulWidget {
   const editProfile({super.key});

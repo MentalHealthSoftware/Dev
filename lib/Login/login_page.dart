@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentalheathstartup/constants/color.dart';
-import 'package:mentalheathstartup/provider/provider.dart';
-import 'package:provider/provider.dart';
+import 'package:mentalheathstartup/Login/otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -105,10 +104,8 @@ class _LoginState extends State<LoginScreen> {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                   Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => OTPScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => OTPScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.darkOrange,
@@ -132,3 +129,4 @@ class _LoginState extends State<LoginScreen> {
       ),
     );
   }
+}

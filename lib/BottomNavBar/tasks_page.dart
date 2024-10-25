@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'app_layout.dart'; // Import the AppLayout
+import '../app_layout.dart'; // Import the AppLayout
 
 class TasksPage extends StatefulWidget {
   @override
@@ -54,8 +54,8 @@ class _TasksPageState extends State<TasksPage> {
                                   children: weekDates.map((date) {
                                     String day = DateFormat('E').format(date);
                                     String dayNumber = date.day.toString();
-                                    return _buildDateButton(
-                                        date == now, day, dayNumber, buttonWidth);
+                                    return _buildDateButton(date == now, day,
+                                        dayNumber, buttonWidth);
                                   }).toList(),
                                 );
                               },
@@ -99,8 +99,8 @@ class _TasksPageState extends State<TasksPage> {
                                 children: [
                                   _buildTaskCard(0, 'Drink Water',
                                       'Drink 3 litres of water today'),
-                                  _buildTaskCard(
-                                      1, 'Exercise', 'Do 30 minutes of exercise'),
+                                  _buildTaskCard(1, 'Exercise',
+                                      'Do 30 minutes of exercise'),
                                   _buildTaskCard(
                                       2, 'Read', 'Read 50 pages of a book'),
                                   _buildTaskCard(

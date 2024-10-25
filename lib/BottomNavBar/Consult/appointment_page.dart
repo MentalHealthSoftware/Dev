@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'app_layout.dart';
+import '../../app_layout.dart';
 
 class AppointmentPage extends StatefulWidget {
   @override
